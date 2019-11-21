@@ -41,6 +41,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem25 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -60,6 +61,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem17.setText("jMenuItem17");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
         setResizable(false);
 
@@ -109,6 +111,9 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem10.setText("Classificação");
         jMenu3.add(jMenuItem10);
 
+        jMenuItem25.setText("Filme");
+        jMenu3.add(jMenuItem25);
+
         jMenuItem11.setText("DVD");
         jMenu3.add(jMenuItem11);
 
@@ -128,7 +133,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem15.setText("Classificação");
         jMenu1.add(jMenuItem15);
 
-        jMenuItem16.setText("filme");
+        jMenuItem16.setText("Filme");
         jMenu1.add(jMenuItem16);
 
         jMenuItem18.setText("DVD");
@@ -174,11 +179,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+            .addGap(0, 596, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 314, Short.MAX_VALUE)
         );
 
         pack();
@@ -258,6 +263,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
+    private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
