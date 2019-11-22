@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Nov-2019 às 23:24
+-- Generation Time: 22-Nov-2019 às 03:06
 -- Versão do servidor: 10.1.37-MariaDB
 -- versão do PHP: 7.3.0
 
@@ -113,22 +113,15 @@ CREATE TABLE `filme` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `funcionarios`
+-- Estrutura da tabela `funcionario`
 --
 
-CREATE TABLE `funcionarios` (
+CREATE TABLE `funcionario` (
   `idfuncionario` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `login` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `funcionarios`
---
-
-INSERT INTO `funcionarios` (`idfuncionario`, `nome`, `login`, `senha`) VALUES
-(1, 'Administrador', 'qwe', '123');
 
 --
 -- Indexes for dumped tables
@@ -176,9 +169,9 @@ ALTER TABLE `filme`
   ADD KEY `idclassificacao` (`idclassificacao`);
 
 --
--- Indexes for table `funcionarios`
+-- Indexes for table `funcionario`
 --
-ALTER TABLE `funcionarios`
+ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`idfuncionario`);
 
 --
@@ -222,10 +215,10 @@ ALTER TABLE `filme`
   MODIFY `idfilme` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `funcionarios`
+-- AUTO_INCREMENT for table `funcionario`
 --
-ALTER TABLE `funcionarios`
-  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `funcionario`
+  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
