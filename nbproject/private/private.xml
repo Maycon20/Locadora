@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/Visao/Cadastrar/CadastrarCategoria.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/Visao/Cadastrar/CadastrarDVD.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/Visao/Consultar/ConsultarCategoria.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/Visao/Cadastrar/CadastrarCliente.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/Visao/Cadastrar/CadastrarFilme.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/Visao/Cadastrar/CadastrarClassificacao.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/principal/Login.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/Locacao/ConsultaDevolucao.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/Visao/Cadastrar/CadastrarFuncionario.java</file>
-            <file>file:/C:/Users/maria/Documents/NetBeansProjects/Locadora/src/Visao/Consultar/ConsultarCliente.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
