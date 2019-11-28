@@ -9,6 +9,6 @@ package DAO;
  *
  * @author Betty
  */
-public class Conexao {
+public class Conexao extends ExecuteSQL{
     
 }
