@@ -5,38 +5,37 @@
  */
 package DAO;
 
-import Modelo.*;
 import java.sql.Connection;
+import Modelo.*;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author Betty
  */
-public class CategoriaDAO extends ExecuteSQL {
+public class FuncionarioDAO extends ExecuteSQL {
     
-    public CategoriaDAO(Connection con) {
+    public FuncionarioDAO(Connection con) {
         super(con);
     }
-   
-    public String Inserir_Categoria(Categoria a) {
-        try{
-            String sql = "insert into categoria values(0,?)";
+    
+     public String Inserir_Funcionario(Funcionario a) {
+        try {
+            String sql = "insert into funcionario values(0,?,?,?)";
             PreparedStatement ps = getCon().prepareStatement(sql);
             
             ps.setString(1, a.getNome());
+            ps.setString(2, a.getLogin());
+            ps.setString(3, a.getSenha());
             
             if (ps.executeUpdate() > 0) {
-                return "Inserido com sucesso";
+                return "Inserido com sucesso!";
             } else {
-                return "Erro ao inserir!";
+                return "Erro ao inserir";
             }
-        } catch (Exception e){
+        } catch (SQLException e) {
             return e.getMessage();
         }
-    }     
+    }
 }
