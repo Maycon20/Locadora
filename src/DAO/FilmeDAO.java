@@ -9,9 +9,13 @@ import Modelo.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+<<<<<<< HEAD
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+=======
+import java.util.*;
+>>>>>>> f9bb64c63430d3e5d1c8c9b624fae198829b240a
 
 /**
  *
@@ -70,6 +74,7 @@ public class FilmeDAO extends ExecuteSQL {
         }
     }
     
+<<<<<<< HEAD
      public List<Filme> ConsultaCodigoFilme(String nome) {
         
         String sql = "select idfilme from filme where titulo = '"+ nome +"'";
@@ -77,10 +82,18 @@ public class FilmeDAO extends ExecuteSQL {
         
         try {
             
+=======
+    public List<Filme> ConsultaNomeFilme(int cod) {
+        String sql = "select titulo, capa from filme where idfilme = "+ cod +"";
+        List<Filme> lista = new ArrayList<>();
+        
+        try {
+>>>>>>> f9bb64c63430d3e5d1c8c9b624fae198829b240a
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
             if (rs != null) {
+<<<<<<< HEAD
                 
                 while (rs.next()) {
                     
@@ -132,4 +145,21 @@ public class FilmeDAO extends ExecuteSQL {
         }
         
     }
+=======
+                while (rs.next()) {
+                    Filme a = new Filme();
+                    a.setTitulo(rs.getString(1));
+                    a.setCapa(rs.getString(2));
+                    lista.add(a);
+                }
+                
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    } 
+>>>>>>> f9bb64c63430d3e5d1c8c9b624fae198829b240a
 }

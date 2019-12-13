@@ -37,6 +37,7 @@ public class ClassificacaoDAO extends ExecuteSQL {
         } catch (Exception e){
             return e.getMessage();
         }
+<<<<<<< HEAD
     }  
      
   public List<Classificacao> LisarComboClassificacao() {
@@ -44,10 +45,21 @@ public class ClassificacaoDAO extends ExecuteSQL {
         List<Classificacao> lista = new ArrayList<>();
 
         try {
+=======
+    }     
+
+      public boolean Testar_Classificacao(int cod) {
+        boolean Resultado = false;
+        
+        try {
+            
+            String sql = "select * from classificacao where idclassificacao = "+ cod +"";
+>>>>>>> f9bb64c63430d3e5d1c8c9b624fae198829b240a
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
             if (rs != null) {
+<<<<<<< HEAD
                 while (rs.next()) {
                     Classificacao a = new Classificacao();
                     a.setNome(rs.getString(1));
@@ -75,12 +87,47 @@ public class ClassificacaoDAO extends ExecuteSQL {
                 while (rs.next()) {
                     Classificacao a = new Classificacao();
                     a.setCodigo(rs.getInt(1));
+=======
+                
+                while (rs.next()) {
+                    
+                    Resultado = true;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+        return Resultado;
+    }
+    
+            public List<Classificacao> CapturarClassificacao(int cod){
+        String sql = "select * from classificacao where idclassificacao = "+ cod +"";
+        List<Classificacao> lista = new ArrayList<>();
+        
+        try {
+
+                PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                        
+                
+                while (rs.next()) {
+                    
+                    Classificacao a = new Classificacao();
+                    
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setPreco(rs.getDouble(3));
+                    
+>>>>>>> f9bb64c63430d3e5d1c8c9b624fae198829b240a
                     lista.add(a);
                 }
                 return lista;
             } else {
                 return null;
             }
+<<<<<<< HEAD
         } catch (Exception e) {
             return null;
             
@@ -125,8 +172,120 @@ public class ClassificacaoDAO extends ExecuteSQL {
             } else {
                 return null;
             }
+=======
         } catch (SQLException e) {
             return null;
         }
     }
+    
+    public String Alterar_Classificacao(Classificacao a) {
+        String sql = "update classificacao set nome = ? ,preco = ? where idclassificacao = ? ";
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+        
+            ps.setString(1, a.getNome());
+            ps.setDouble(2, a.getPreco());
+            ps.setInt(3, a.getCodigo());
+            
+            if (ps.executeUpdate() > 0) {
+                return "Atualizado com sucesso!";
+            } else {
+                return "Erro ao Atualizar!";
+            
+            }
+        } catch (SQLException e) {
+        
+            return e.getMessage();
+        
+        }
+    }
+
+     public List<Classificacao> ListarClassificacao() {
+        String sql = "select idclassificacao,nome,preco from classificacao";
+        List<Classificacao> Lista = new ArrayList<>();
+           
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Classificacao a = new Classificacao();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setPreco(rs.getDouble(3));
+                    
+                    Lista.add(a);
+                }
+                
+                return Lista;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+        
+    }
+    
+    public List<Classificacao> Pesquisar_Nome_Cliente(String nome) {
+        String sql = "select idclassificacao,nome,preco from classificacao where nome like '%"+ nome +"%'";
+        List<Classificacao> Lista = new ArrayList<>();
+           
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Classificacao a = new Classificacao();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setPreco(rs.getDouble(3));
+                
+                    Lista.add(a);
+                }
+                return Lista;
+            } else {
+                return null;
+            }
+            
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    public List<Classificacao> Pesquisar_Cod_Cliente(int cod) {
+        String sql = "select idclassificacao,nome,preco from classificacao where idclassificacao like '%"+ cod +"%'";
+        List<Classificacao> Lista = new ArrayList<>();
+           
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Classificacao a = new Classificacao();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setPreco(rs.getDouble(3));
+                
+                    Lista.add(a);
+                    
+                }
+                return Lista;
+            } else {
+                return null;
+            }
+            
+>>>>>>> f9bb64c63430d3e5d1c8c9b624fae198829b240a
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> f9bb64c63430d3e5d1c8c9b624fae198829b240a
 }
