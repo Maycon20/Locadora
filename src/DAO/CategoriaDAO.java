@@ -6,6 +6,8 @@
 package DAO;
 
 import Modelo.*;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,5 +40,153 @@ public class CategoriaDAO extends ExecuteSQL {
         } catch (Exception e){
             return e.getMessage();
         }
-    }     
+    }   
+    
+    
+    
+    public boolean Testar_Categoria(int cod) {
+            boolean Resultado = false;
+            try {
+                
+                String sql = "select * from categoria where idcategoria = " + cod + "";
+                PreparedStatement ps = getCon() . prepareStatement(sql);
+                ResultSet  rs = ps.executeQuery();
+                
+                if (rs != null) {
+                    while (rs.next()) { 
+                        Resultado = true;
+                    }
+                }
+                
+                } catch (SQLException ex) {
+                    ex.getMessage();
+                    
+                }
+            return Resultado;
+        }
+        
+        public List<Categoria> CapturarCategoria(int cod) {
+                String sql = "select * from categoria where idcategoria =" + cod + " ";
+        List<Categoria> lista = new ArrayList<>();
+        try {
+         PreparedStatement ps = getCon().prepareStatement(sql);
+         ResultSet rs = ps .executeQuery();
+         if (rs != null) {
+             while  (rs.next()) {
+                 Categoria a = new Categoria();
+                 a.setCodigo(rs.getInt(1));
+                 a.setNome(rs.getString(2));
+                 lista.add(a);
+             }
+             return lista;
+         }else {
+             return null;
+             
+             }
+           } catch (SQLException e) {
+    return null;
+         }     
+        
+        
+        }
+        public String Alterar_Categoria(Categoria a) {
+            String sql = "update categoria set nome = ? where idcategoria = ?";
+            try {
+                PreparedStatement ps =  getCon ().prepareStatement (sql);
+                 ps.setString(1, a.getNome());
+                 ps.setInt(2, a.getCodigo()); 
+                 if (ps.executeUpdate() > 0){
+                     return "Atualizado com Sucesso.";
+                 } else{ 
+                     return "Erro ao Atualizar";
+                 }
+            } catch (SQLException e) {
+                return e.getMessage();
+                 }
+                     
+                
+            
+        }
+    
+         public List<Categoria> ListarCategoria() {
+        String sql = "select idcategoria,nome from categoria";
+        List<Categoria> Lista = new ArrayList<>();
+           
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Categoria a = new Categoria();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    
+                    Lista.add(a);
+                }
+                return Lista;
+                
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+        
+    }
+    
+    public List<Categoria> Pesquisar_Nome_Categoria(String nome) {
+        String sql = "select idcategoria,nome from categoria where nome like '%"+ nome +"%'";
+        List<Categoria> Lista = new ArrayList<>();
+           
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Categoria a = new Categoria();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                
+                    Lista.add(a);
+                }
+                
+                return Lista;
+            } else {
+                return null;
+            }
+            
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    public List<Categoria> Pesquisar_Cod_Categoria(int cod) {
+        String sql = "select idcategoria,nome from categoria where idcategoria like '%"+ cod +"%'";
+        List<Categoria> Lista = new ArrayList<>();
+           
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Categoria a = new Categoria();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                
+                    Lista.add(a);
+                }
+                
+                return Lista;
+                
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
 }

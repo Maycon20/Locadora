@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 package Visao.Consultar;
+import DAO.ClassificacaoDAO;
+import DAO.Conexao;
+import Modelo.*;
+import java.sql.Connection;
+import java.util.*;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -17,9 +24,33 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
     public ConsultarClassificacao() {
         initComponents();
         setLocationRelativeTo(this);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        AtualizaTable();
     }
 
+    public void AtualizaTable() {
+        Connection con = Conexao.AbrirConexao();
+        ClassificacaoDAO bd = new ClassificacaoDAO(con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = bd.ListarClassificacao();
+        
+        DefaultTableModel tbm = (DefaultTableModel) jTable1.getModel();
+        
+        while (tbm.getRowCount() > 0) {
+            tbm.removeRow(0);
+        }
+
+        int i = 0;
+        for (Classificacao tab : lista) {
+            
+            tbm.addRow(new String[i]);
+            jTable1.setValueAt(tab.getNome(), i, 0);
+            jTable1.setValueAt(tab.getPreco(), i, 1);
+            i++;
+        }
+        
+        Conexao.FecharConexao(con);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,6 +104,11 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
         });
 
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lupa1.png"))); // NOI18N
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("Pesquisa por Código");
@@ -84,9 +120,19 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
         });
 
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lupa1.png"))); // NOI18N
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jButton15.setText("Todos");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -156,6 +202,66 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField11ActionPerformed
 
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        Connection con = Conexao.AbrirConexao();
+        ClassificacaoDAO bd = new ClassificacaoDAO(con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = bd.Pesquisar_Nome_Cliente(jTextField10.getText());
+        
+        DefaultTableModel tbm = (DefaultTableModel) jTable1.getModel();
+        
+        while (tbm.getRowCount() > 0) {
+            tbm.removeRow(0);
+        }
+
+        int i = 0;
+        for (Classificacao tab : lista) {
+            
+            tbm.addRow(new String[i]);
+            jTable1.setValueAt(tab.getNome(), i, 0);
+            jTable1.setValueAt(tab.getPreco(), i, 1);
+            
+            jTextField10.setText("");
+            i++;
+        }
+        Conexao.FecharConexao(con);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+         int cod = Integer.parseInt(jTextField11.getText());
+        
+        Connection con = Conexao.AbrirConexao();
+        ClassificacaoDAO bd = new ClassificacaoDAO(con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = bd.Pesquisar_Cod_Cliente(cod);
+        
+        DefaultTableModel tbm = (DefaultTableModel) jTable1.getModel();
+        
+        while (tbm.getRowCount() > 0) {
+            tbm.removeRow(0);
+        }
+
+        int i = 0;
+        for (Classificacao tab : lista) {
+            tbm.addRow(new String[i]);
+            jTable1.setValueAt(tab.getNome(), i, 0);
+            jTable1.setValueAt(tab.getPreco(), i,1);
+            
+            
+            jTextField11.setText("");
+            i++;
+        }
+        
+        Conexao.FecharConexao(con);
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+        AtualizaTable();
+    }//GEN-LAST:event_jButton15ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -192,47 +298,15 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

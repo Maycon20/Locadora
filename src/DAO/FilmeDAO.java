@@ -8,7 +8,8 @@ package DAO;
 import Modelo.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.List;
+import java.sql.ResultSet;
+import java.util.*;
 
 /**
  *
@@ -42,7 +43,28 @@ public class FilmeDAO extends ExecuteSQL {
         }
     }
     
-    public List<Filme> ConsultaCodigoFilme () {
-        return null;
+    public List<Filme> ConsultaNomeFilme(int cod) {
+        String sql = "select titulo, capa from filme where idfilme = "+ cod +"";
+        List<Filme> lista = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Filme a = new Filme();
+                    a.setTitulo(rs.getString(1));
+                    a.setCapa(rs.getString(2));
+                    lista.add(a);
+                }
+                
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
     } 
 }
