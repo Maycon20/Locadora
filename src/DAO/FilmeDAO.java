@@ -8,6 +8,9 @@ package DAO;
 import Modelo.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +25,7 @@ public class FilmeDAO extends ExecuteSQL {
     
     public String Inserir_Filme(Filme a) {
         try{
-            String sql = "insert into cliente values(0,?,?,?,?,?,?)";
+            String sql = "insert into filme values(0,?,?,?,?,?,?)";
             PreparedStatement ps = getCon().prepareStatement(sql);
             
             ps.setString(1, a.getTitulo());
@@ -41,8 +44,92 @@ public class FilmeDAO extends ExecuteSQL {
             return e.getMessage();
         }
     }
+ 
+
+    public List<Filme> ListarComboFilme() {
+        String sql = "select titulo from filme order by titulo";
+        List<Filme> lista = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Filme a = new Filme();
+                    a.setTitulo(rs.getString(1));
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+            
+        } catch (Exception e) {
+            return null;
+        }
+    }
     
-    public List<Filme> ConsultaCodigoFilme () {
-        return null;
-    } 
+     public List<Filme> ConsultaCodigoFilme(String nome) {
+        
+        String sql = "select idfilme from filme where titulo = '"+ nome +"'";
+        List<Filme> lista = new ArrayList<>();
+        
+        try {
+            
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                
+                while (rs.next()) {
+                    
+                    Filme a = new Filme();
+                    a.setCodigo(rs.getInt(1));
+                    lista.add(a);
+
+                }
+                
+                return lista;
+                
+            } else {
+                
+                return null;
+                
+            }
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }
+        
+    }
+      public String Excluir_Filme(Filme a){
+        
+        String sql = "delete from filme where idfilme = ? and titulo = ?";
+        
+        try {
+            
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, a.getCodigo());
+            ps.setString(2, a.getTitulo());
+            
+            if (ps.executeUpdate() > 0) {
+                
+                return "Excluido com sucesso";
+                
+            } else {
+                
+                return "Erro ao excluir";
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            return e.getMessage();
+            
+        }
+        
+    }
 }

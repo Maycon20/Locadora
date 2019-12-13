@@ -1,0 +1,7 @@
+ConsultaDevolucao
+
+	INSERIRDADOS
+	        for (DVD a : listaDVD) {
+           		 int codigo = a.getCod_filme();
+          	  	listaFIL = filme.Pesquisa_Cod_Filme(codigo);
+       		 }

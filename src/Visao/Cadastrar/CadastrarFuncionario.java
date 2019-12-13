@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 package Visao.Cadastrar;
-
 import DAO.Conexao;
 import DAO.FuncionarioDAO;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import Modelo.*;
-
 /**
  *
  * @author Betty
@@ -89,9 +87,19 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("Limpar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -225,29 +233,38 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         String nome = jTF_Nome.getText();
         String login = jTF_Login.getText();
         String senha = jTF_Senha.getText();
-        
         if (nome.equals("") || login.equals("") || senha.equals("")) {
-            JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio!", "Video Locadora", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio!", 
+                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
         } else {
             Connection con = Conexao.AbrirConexao();
             FuncionarioDAO sql = new FuncionarioDAO(con);
             Funcionario a = new Funcionario();
-            
             a.setNome(nome);
             a.setLogin(login);
             a.setSenha(senha);
-            
             sql.Inserir_Funcionario(a);
             Conexao.FecharConexao(con);
-            
             jTF_Nome.setText("");
             jTF_Login.setText("");
             jTF_Senha.setText("");
-            
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!", "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!",
+                    "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+          int a = JOptionPane.showConfirmDialog(null, "Deseja mesmo cancelar a operação?");
+        if (a == 0) {
+            dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+            jTF_Nome.setText("");
+            jTF_Login.setText("");
+            jTF_Senha.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
     /**
      * @param args the command line arguments
      */

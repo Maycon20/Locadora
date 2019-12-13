@@ -40,5 +40,83 @@ public class DVDDAO extends ExecuteSQL {
             return e.getMessage();
         }
     }     
+     public List<DVD> ListarComboDVD() {
+        String sql = "select nome from dvd order by nome";
+        List<DVD> lista = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    DVD a = new DVD();
+                    a.setSituacao(rs.getString(1));
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+            
+        } catch (Exception e) {
+            return null;
+        }
+     }
+     
+         public String Excluir_DVD(DVD a){
+        String sql = "delete from dvd where idfilme = ?";
+
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, a.getCod_filme());
+            
+            if (ps.executeUpdate() > 0) {
+                return "Excluido com sucesso";
+            } else {
+                return "Erro ao excluir";
+            }
+        } catch (SQLException e) {
+
+            return e.getMessage();
+
+        }
+    }
+  public boolean Teste_DVD(int cod) {
+        boolean teste = false;
+        try {
+            String sql = "select iddvd from dvd where iddvd = "+ cod +"";
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();   
+            
+            if (rs != null) {
+                
+                while (rs.next()) {
+                    teste = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return teste;
+  }  
   
+    public boolean Testar_Situacao(int cod) {
+        boolean teste = false;
+        try {
+            String sql = "select iddvd from dvd where iddvd = "+ cod +" and situacao = 'Disponivel'";
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();   
+            
+            if (rs != null) {
+                
+                while (rs.next()) {
+                    teste = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return teste;
+    }
 }
